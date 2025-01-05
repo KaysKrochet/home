@@ -19,12 +19,23 @@
             height: 100%;
             background-color: #ffc0cb;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
         }
+        #loading-screen h1 {
+            font-size: 36px; /* Larger size */
+            color: #fff;
+            margin-bottom: 20px; /* Space between text and gif */
+        }
         #loading-screen img {
-            width: 100px; /* Adjust size as needed */
+            width: 150px; /* Increased size */
+        }
+        #loading-screen p {
+            font-size: 20px;
+            color: #fff;
+            margin-top: 20px;
         }
         header {
             background-color: #ffc0cb;
@@ -97,7 +108,9 @@
 </head>
 <body>
     <div id="loading-screen">
+        <h1>Kay's Krochet</h1>
         <img src="https://www.epidomastegasis.gr/pub/Content/images/loaders/loader4.gif" alt="Loading">
+        <p>Loading your page...</p>
     </div>
 
     <header>
