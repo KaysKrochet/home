@@ -100,7 +100,7 @@
             <div class="error" id="error">No More Than One Color</div>
             <div id="totalCost">Total Cost: $3</div>
             <div id="orderSummary">What You Ordered: </div>
-            <form id="orderForm" action="submit_order.php" method="POST">
+            <form id="orderForm">
                 <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
                 <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
                 <input type="email" name="email" id="email" placeholder="Email" required>
@@ -171,7 +171,22 @@
         document.getElementById('orderForm').addEventListener('submit', function(event) {
             event.preventDefault();
             prepareOrder();
-            this.submit();
+
+            const formData = new FormData(this);
+
+            fetch('orders.html', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    alert('Order successfully sent!');
+                } else {
+                    alert('Failed to send order.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send order.');
+            });
         });
     </script>
 </body>
