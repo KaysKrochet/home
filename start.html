@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="https://static.vecteezy.com/system/resources/previews/033/155/551/non_2x/a-ball-of-yarn-on-a-transparent-background-free-png.png">
     <title>Kay's Krochet</title>
     <style>
         body {
@@ -28,6 +27,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            opacity: 0; /* Initially hidden for animation */
+            animation: fadeInSlide 1s ease-in-out forwards;
         }
         .flower {
             border: 1px solid #ddd;
@@ -37,6 +38,8 @@
             text-align: center;
             width: 30%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px); /* Slide from bottom */
+            animation: slideIn 1s ease-in-out forwards;
         }
         .flower img {
             max-width: 100%;
@@ -52,6 +55,16 @@
             width: 100%;
             bottom: 0;
         }
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -64,47 +77,47 @@
         <h2>Our Collection</h2>
         <div class="flowers">
             <div class="flower">
-                <img src="rose.jpg" alt="Rose">
+                <a href="rose.html"><img src="rose.jpg" alt="Rose"></a>
                 <h3>Rose</h3>
                 <p>Classic elegance in every stitch.</p>
             </div>
             <div class="flower">
-                <img src="callalily.jpg" alt="Calla Lily">
+                <a href="callalily.html"><img src="callalily.jpg" alt="Calla Lily"></a>
                 <h3>Calla Lily</h3>
                 <p>Graceful and unique.</p>
             </div>
             <div class="flower">
-                <img src="closedtulip.jpg" alt="Closed Tulip">
+                <a href="closedtulip.html"><img src="closedtulip.jpg" alt="Closed Tulip"></a>
                 <h3>Closed Tulip</h3>
                 <p>Whimsical and charming.</p>
             </div>
             <div class="flower">
-                <img src="lavender.jpg" alt="Lavender">
+                <a href="lavender.html"><img src="lavender.jpg" alt="Lavender"></a>
                 <h3>Lavender</h3>
                 <p>Delicate and soothing.</p>
             </div>
             <div class="flower">
-                <img src="sunflower.jpg" alt="Sunflower">
+                <a href="sunflower.html"><img src="sunflower.jpg" alt="Sunflower"></a>
                 <h3>Sunflower</h3>
                 <p>Bright and cheerful.</p>
             </div>
             <div class="flower">
-                <img src="carnation.jpg" alt="Carnation">
+                <a href="carnation.html"><img src="carnation.jpg" alt="Carnation"></a>
                 <h3>Carnation</h3>
                 <p>Striking and bold.</p>
             </div>
             <div class="flower">
-                <img src="daisy.jpg" alt="Daisy">
+                <a href="daisy.html"><img src="daisy.jpg" alt="Daisy"></a>
                 <h3>Daisy</h3>
                 <p>Simple and lovely.</p>
             </div>
             <div class="flower">
-                <img src="realisticrose.jpg" alt="Realistic Rose">
+                <a href="realisticrose.html"><img src="realisticrose.jpg" alt="Realistic Rose"></a>
                 <h3>Realistic Rose</h3>
                 <p>Life-like perfection.</p>
             </div>
             <div class="flower">
-                <img src="openedtulip.jpg" alt="Opened Tulip">
+                <a href="openedtulip.html"><img src="openedtulip.jpg" alt="Opened Tulip"></a>
                 <h3>Opened Tulip</h3>
                 <p>Colorful and vibrant.</p>
             </div>
