@@ -65,6 +65,10 @@
             text-align: center;
             margin-top: 10px;
         }
+        .order-details {
+            margin-top: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +100,7 @@
             <div class="error" id="error">No More Than One Color</div>
             <div id="totalCost">Total Cost: $3</div>
             <div id="orderSummary">What You Ordered: </div>
-            <form id="orderForm" action="orders.html" method="POST" target="_blank" onsubmit="sendOrder(event)">
+            <form id="orderForm" onsubmit="sendOrder(event)">
                 <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
                 <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
                 <input type="email" name="email" id="email" placeholder="Email" required>
@@ -106,6 +110,15 @@
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
                 <button class="button" type="submit">Send Order</button>
             </form>
+            <div class="order-details" id="orderDetails">
+                <h2>Order Details</h2>
+                <p><strong>Name:</strong> <span id="orderName"></span></p>
+                <p><strong>Email:</strong> <span id="orderEmail"></span></p>
+                <p><strong>Address:</strong> <span id="orderAddress"></span></p>
+                <p><strong>Order:</strong> <span id="orderInfo"></span></p>
+                <p><strong>Total Cost:</strong> <span id="orderTotalCost"></span></p>
+                <p><strong>Order Date and Time:</strong> <span id="orderDateTime"></span></p>
+            </div>
         </div>
     </div>
 
@@ -168,23 +181,14 @@
             event.preventDefault();
             prepareOrder();
 
-            const form = document.getElementById('orderForm');
-            const formData = new FormData(form);
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const quantity = document.getElementById('hiddenQuantity').value;
+            const colors = document.getElementById('hiddenColors').value;
+            const totalCost = document.getElementById('hiddenTotalCost').value;
+            const dateTime = new Date().toLocaleString();
 
-            fetch('orders.html', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    alert('Order submitted successfully!');
-                } else {
-                    alert('Error submitting order. Please try again.');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting order. Please try again.');
-            });
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('orderName').innerText = firstName + ' ' + lastName;
+            document[_{{{CITATION{{{_1{](https://github.com/hello-jerryle/portfolio/tree/96e16ad47d3eddfd961092edb3dc14f1723d7694/BACKGROUND.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
