@@ -19,11 +19,14 @@
             padding: 20px 0;
             text-align: center;
         }
+        header h1 {
+            color: #fff; /* Keep title white */
+        }
         header h2 {
             margin-top: 0;
             font-size: 18px;
             line-height: 1.6;
-            color: grey; /* Changed color to grey */
+            color: #d3d3d3; /* Light grey */
         }
         .container {
             width: 80%;
@@ -54,9 +57,11 @@
             height: auto;
             border-radius: 5px;
         }
+        .flower h3, .flower button {
+            color: #d3d3d3; /* Light grey */
+        }
         .flower button {
             background-color: #ff69b4;
-            color: white;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -81,9 +86,11 @@
             transform: translateY(20px); /* Slide from bottom */
             animation: slideIn 1s ease-in-out forwards;
         }
+        .custom h3, .custom button {
+            color: #d3d3d3; /* Light grey */
+        }
         .custom button {
             background-color: #ff69b4;
-            color: white;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -127,4 +134,75 @@
         <h1>Kay's Krochet</h1>
         <h2>
             🌸 Welcome to Kay's Krochet! 🌸<br><br>
-            At Kay's Krochet, we transform the timeless art of crochet into beautiful, handmade floral creations. Our diverse collection of crocheted flowers ranges from the classic elegance of roses
+            At Kay's Krochet, we transform the timeless art of crochet into beautiful, handmade floral creations. Our diverse collection of crocheted flowers ranges from the classic elegance of roses and calla lilies to the vibrant charm of sunflowers and daisies. Whether you're looking for delicate lavender, striking carnations, or realistic and whimsical tulips, you'll find them all here.<br><br>
+            Each flower is meticulously crafted with love, attention to detail, and a passion for bringing nature’s beauty into your home. Kay's Krochet is more than just flowers; it's about giving you pieces that add warmth, personality, and a touch of magic to any space.<br><br>
+            Embrace the beauty of everlasting blooms and add a bit of handmade charm to your life with Kay's Krochet.
+        </h2>
+    </header>
+    
+    <div class="container">
+        <h2 style="color: #d3d3d3;">Our Collection</h2>
+        <div class="flowers">
+            <div class="flower">
+                <a href="rose.html"><img src="rose.jpg" alt="Rose"></a>
+                <h3>Rose</h3>
+                <a href="rose.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="calalily.html"><img src="calalily.jpg" alt="Calalily"></a>
+                <h3>Calalily</h3>
+                <a href="calalily.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="closedtulip.html"><img src="closedtulip.jpg" alt="Closed Tulip"></a>
+                <h3>Closed Tulip</h3>
+                <a href="closedtulip.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="lavender.html"><img src="lavender.jpg" alt="Lavender"></a>
+                <h3>Lavender</h3>
+                <a href="lavender.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="sunflower.html"><img src="sunflower.jpg" alt="Sunflower"></a>
+                <h3>Sunflower</h3>
+                <a href="sunflower.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="carnation.html"><img src="carnation.jpg" alt="Carnation"></a>
+                <h3>Carnation</h3>
+                <a href="carnation.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="daisy.html"><img src="daisy.jpg" alt="Daisy"></a>
+                <h3>Daisy</h3>
+                <a href="daisy.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="realisticrose.html"><img src="realisticrose.jpg" alt="Realistic Rose"></a>
+                <h3>Realistic Rose</h3>
+                <a href="realisticrose.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="openedtulip.html"><img src="openedtulip.jpg" alt="Opened Tulip"></a>
+                <h3>Opened Tulip</h3>
+                <a href="openedtulip.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <h3>Bouquette</h3>
+                <a href="bouquette.html"><button>Order Bouquette</button></a>
+            </div>
+            <div class="custom">
+                <h3>Have Something Customly Crocheted</h3>
+                <a href="custom.html"><button>Order Custom Crochet</button></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scroll-space"></div>
+    
+    <footer>
+        <p>&copy; 2025 Kay's Krochet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
