@@ -15,6 +15,7 @@
         }
         .container {
             display: flex;
+            flex-direction: column;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
@@ -57,6 +58,9 @@
             color: red;
             display: none;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -69,7 +73,7 @@
             <div class="description">Beautiful and fresh roses to brighten your day.</div>
             <div class="description">Elegant roses perfect for any occasion.</div>
             <div class="description">Vibrant roses that make a statement.</div>
-            <button class="button">1 Rose Costs: $3</button>
+            <button class="button" onclick="calculateTotal()">Click Me For Total Cost</button>
             <input type="range" id="roseQuantity" class="slider" min="1" max="12" value="1" oninput="updateOrder()">
             <label for="roseQuantity">How Many Roses Do You Want</label>
             <div class="checkboxes">
@@ -85,9 +89,18 @@
                 <label><input type="checkbox" name="color" value="White" onclick="checkSingleCheckbox(this)"> White</label>
             </div>
             <div class="error" id="error">No More Than One Color</div>
-            <button class="button" onclick="calculateTotal()">TOTAL COST</button>
             <div id="totalCost">Total Cost: $3</div>
             <div id="orderSummary">What You Ordered: </div>
+            <form id="orderForm" action="orders.html" method="POST" target="_blank">
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="address" id="address" placeholder="Address" required>
+                <input type="hidden" name="quantity" id="hiddenQuantity">
+                <input type="hidden" name="colors" id="hiddenColors">
+                <input type="hidden" name="totalCost" id="hiddenTotalCost">
+                <button class="button" onclick="prepareOrder()">Send Order</button>
+            </form>
         </div>
     </div>
 
@@ -131,6 +144,16 @@
             const quantity = document.getElementById('roseQuantity').value;
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
             document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
+        }
+
+        function prepareOrder() {
+            const quantity = document.getElementById('roseQuantity').value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = document.getElementById('totalCost').innerText;
+            
+            document.getElementById('hiddenQuantity').value = quantity;
+            document.getElementById('hiddenColors').value = colors.join(', ');
+            document.getElementById('hiddenTotalCost').value = totalCost;
         }
     </script>
 </body>
