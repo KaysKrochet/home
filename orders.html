@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-info {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <div class="order-info">
+            <strong>First Name:</strong> <span id="firstName"></span>
+        </div>
+        <div class="order-info">
+            <strong>Last Name:</strong> <span id="lastName"></span>
+        </div>
+        <div class="order-info">
+            <strong>Email:</strong> <span id="email"></span>
+        </div>
+        <div class="order-info">
+            <strong>Address:</strong> <span id="address"></span>
+        </div>
+        <div class="order-info">
+            <strong>Quantity:</strong> <span id="quantity"></span>
+        </div>
+        <div class="order-info">
+            <strong>Colors:</strong> <span id="colors"></span>
+        </div>
+        <div class="order-info">
+            <strong>Total Cost:</strong> <span id="totalCost"></span>
+        </div>
+    </div>
+
+    <script>
+        // Function to get URL parameter value
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Set the order details in the HTML
+        document.getElementById('firstName').innerText = getQueryParameter('firstName');
+        document.getElementById('lastName').innerText = getQueryParameter('lastName');
+        document.getElementById('email').innerText = getQueryParameter('email');
+        document.getElementById('address').innerText = getQueryParameter('address');
+        document.getElementById('quantity').innerText = getQueryParameter('quantity');
+        document.getElementById('colors').innerText = getQueryParameter('colors');
+        document.getElementById('totalCost').innerText = getQueryParameter('totalCost');
+    </script>
+</body>
+</html>
