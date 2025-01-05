@@ -38,15 +38,6 @@
         .description {
             margin-bottom: 10px;
         }
-        .button {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
         .slider {
             width: 100%;
         }
@@ -81,7 +72,6 @@
             <div class="description">Beautiful and fresh roses to brighten your day.</div>
             <div class="description">Elegant roses perfect for any occasion.</div>
             <div class="description">Vibrant roses that make a statement.</div>
-            <button class="button" onclick="calculateTotal()">Click Me For Total Cost</button>
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
             <label for="roseQuantity">How Many Roses Do You Want</label>
             <div class="slider-value" id="sliderValue">0</div>
@@ -98,7 +88,7 @@
                 <label><input type="checkbox" name="color" value="White" onclick="checkSingleCheckbox(this)"> White</label>
             </div>
             <div class="error" id="error">No More Than One Color</div>
-            <div id="totalCost">Total Cost: $3</div>
+            <div id="totalCost">Total Cost: $0</div>
             <div id="orderSummary">What You Ordered: </div>
             <form id="orderForm">
                 <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
@@ -143,18 +133,12 @@
             updateOrder();
         }
 
-        function calculateTotal() {
-            const quantity = slider.value;
-            const colorCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-            const totalCost = quantity * 3 + colorCount * 3;
-            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
-            updateOrder();
-        }
-
         function updateOrder() {
             const quantity = slider.value;
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = quantity * 3 + colors.length * 3;
             sliderValue.innerText = quantity;
+            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
             document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
         }
 
