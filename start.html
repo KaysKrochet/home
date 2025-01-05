@@ -13,59 +13,51 @@
             background-color: #f8f9fa;
             overflow: auto; /* Enable scrollbars */
         }
-        .toolbar {
-            background-color: #ffc0cb;
-            padding: 10px 20px;
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: #ffc0cb;
+            color: #fff;
+            padding: 10px 20px;
         }
-        .toolbar-left {
+        header .left {
             display: flex;
             align-items: center;
         }
-        .toolbar-left img {
+        header .left img {
             width: 30px;
             height: 30px;
             margin-right: 10px;
         }
-        .toolbar-right {
+        header .right {
             display: flex;
-            gap: 15px;
+            align-items: center;
         }
-        .toolbar-right a {
-            position: relative;
-            text-decoration: none;
+        header .right a {
             color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            position: relative;
+            cursor: pointer;
+            font-size: 24px; /* Increase emoji size */
         }
-        .toolbar-right a::after {
+        header .right a:hover::after {
             content: attr(data-hover);
             position: absolute;
-            top: 40px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap;
-            background-color: #000;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
             padding: 5px;
-            border-radius: 5px;
+            border-radius: 3px;
+            white-space: nowrap;
             font-size: 12px;
-            display: none;
-        }
-        .toolbar-right a:hover::after {
-            display: block;
-        }
-        header {
-            background-color: #ffc0cb;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
         }
         header h1 {
-            color: #fff; /* Keep title white */
+            margin: 0;
+            color: #fff;
         }
         header h2 {
             margin-top: 0;
@@ -175,33 +167,19 @@
     </style>
 </head>
 <body>
-    <div class="toolbar">
-        <div class="toolbar-left">
-            <img src="https://cdn-icons-png.freepik.com/512/8446/8446379.png" alt="Kay's Krochet Logo">
-            <span>Kay's Krochet</span>
-        </div>
-        <div class="toolbar-right">
-            <a href="cart.html" data-hover="Your Cart">
-                🛒
-            </a>
-            <a href="contact.html" data-hover="Contact Information">
-                ℹ️
-            </a>
-            <a href="orders.html" data-hover="Orders">
-                📦
-            </a>
-        </div>
-    </div>
     <header>
-        <h1>Kay's Krochet</h1>
-        <h2>
-            🌸 Welcome to Kay's Krochet! 🌸<br><br>
-            At Kay's Krochet, we transform the timeless art of crochet into beautiful, handmade floral creations. Our diverse collection of crocheted flowers ranges from the classic elegance of roses and calla lilies to the vibrant charm of sunflowers and daisies. Whether you're looking for delicate lavender, striking carnations, or realistic and whimsical tulips, you'll find them all here.<br><br>
-            Each flower is meticulously crafted with love, attention to detail, and a passion for bringing nature’s beauty into your home. Kay's Krochet is more than just flowers; it's about giving you pieces that add warmth, personality, and a touch of magic to any space.<br><br>
-            Embrace the beauty of everlasting blooms and add a bit of handmade charm to your life with Kay's Krochet.
-        </h2>
+        <div class="left">
+            <img src="https://cdn-icons-png.freepik.com/512/8446/8446379.png" alt="Favicon">
+            <h1>Kay's Krochet</h1>
+        </div>
+        <div class="right">
+            <a href="cart.html" data-hover="Your Cart">🛒</a>
+            <a href="info.html" data-hover="Contact Information">📞</a>
+            <a href="orders.html" data-hover="Orders">📦</a>
+            <a href="start.html" data-hover="Home">🏠</a>
+        </div>
     </header>
-    
+
     <div class="container">
         <h2 style="color: #000;">Our Collection</h2>
         <div class="flowers">
@@ -211,9 +189,9 @@
                 <a href="rose.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
-                <a href="callalily.html"><img src="callalily.jpg" alt="Calla Lily"></a>
-                <h3>Calla Lily</h3>
-                <a href="callalily.html"><button>Order This Flower</button></a>
+                <a href="calalily.html"><img src="calalily.jpg" alt="Calalily"></a>
+                <h3>Calalily</h3>
+                <a href="calalily.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
                 <a href="closedtulip.html"><img src="closedtulip.jpg" alt="Closed Tulip"></a>
@@ -238,4 +216,24 @@
             <div class="flower">
                 <a href="daisy.html"><img src="daisy.jpg" alt="Daisy"></a>
                 <h3>Daisy</h3>
-                <a href[_{{{CITATION{{{_1{](https://github.com/buribalazs/smooth-drag-order/tree/7b40d21d076c3e31765f61481f537beaf4c5ec9f/README.md)
+                <a href="daisy.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="realisticrose.html"><img src="realisticrose.jpg" alt="Realistic Rose"></a>
+                <h3>Realistic Rose</h3>
+                <a href="realisticrose.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <a href="openedtulip.html"><img src="openedtulip.jpg" alt="Opened Tulip"></a>
+                <h3>Opened Tulip</h3>
+                <a href="openedtulip.html"><button>Order This Flower</button></a>
+            </div>
+            <div class="flower">
+                <h3>Bouquette</h3>
+                <a href="bouquette.html"><button>Order Bouquette</button></a>
+            </div>
+            <div class="custom">
+                <h3>Have Something Customly Crocheted</h3>
+                <a href="custom.html"><button>Order Custom Crochet</button></a>
+            </div>
+        </div>
