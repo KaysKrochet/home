@@ -29,6 +29,7 @@
         <p><strong>Address:</strong> <?php echo htmlspecialchars($_POST['address']); ?></p>
         <p><strong>Order:</strong> <?php echo htmlspecialchars($_POST['quantity'] . ' Rose(s), Color: ' . $_POST['colors']); ?></p>
         <p><strong><?php echo htmlspecialchars($_POST['totalCost']); ?></p>
+        <p><strong>Order Date and Time:</strong> <?php echo date('Y-m-d H:i:s'); ?></p> <!-- Display the current date and time -->
     </div>
 </body>
 </html>
