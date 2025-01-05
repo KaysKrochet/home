@@ -93,6 +93,33 @@
         .flower button:hover {
             background-color: #ff1493; /* Darker pink on hover */
         }
+        .custom {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px); /* Slide from bottom */
+            animation: slideIn 1s ease-in-out forwards;
+        }
+        .custom button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .custom button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+        }
         footer {
             background-color: #ffc0cb;
             color: #fff;
@@ -102,6 +129,9 @@
             width: 100%;
             bottom: 0;
             font-size: 12px; /* Smaller font size */
+        }
+        .scroll-space {
+            height: 100px; /* Space for scrolling */
         }
         @keyframes fadeInSlide {
             to {
@@ -141,9 +171,9 @@
                 <a href="rose.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
-                <a href="callalily.html"><img src="Calalilyy.jpg" alt="Calalily"></a>
-                <h3>Calalily</h3>
-                <a href="Calalily.html"><button>Order This Flower</button></a>
+                <a href="callalily.html"><img src="callalily.jpg" alt="Calla Lily"></a>
+                <h3>Calla Lily</h3>
+                <a href="callalily.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
                 <a href="closedtulip.html"><img src="closedtulip.jpg" alt="Closed Tulip"></a>
@@ -180,28 +210,14 @@
                 <h3>Opened Tulip</h3>
                 <a href="openedtulip.html"><button>Order This Flower</button></a>
             </div>
+            <div class="custom">
+                <h3>Have Something Customly Crocheted</h3>
+                <a href="custom.html"><button>Order Custom Crochet</button></a>
+            </div>
         </div>
     </div>
     
+    <div class="scroll-space"></div>
+    
     <footer>
-        <p>&copy; 2025 Kay's Krochet. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const loadingScreen = document.getElementById("loading-screen");
-            const displayTime = Math.floor(Math.random() * 2000) + 5000; // Random time between 5-7 seconds
-
-            setTimeout(() => {
-                loadingScreen.style.transition = "opacity 1s ease-out";
-                loadingScreen.style.opacity = "0";
-
-                setTimeout(() => {
-                    loadingScreen.style.display = "none";
-                    document.body.style.overflow = "auto"; // Enable scrollbars after loading
-                }, 1000);
-            }, displayTime);
-        });
-    </script>
-</body>
-</html>
+        <p>&copy; 
