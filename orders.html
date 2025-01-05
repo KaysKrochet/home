@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rose Shop</title>
+    <title>Order Confirmation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: pink; /* Changed background color to pink */
+            background-color: #f0f0f0;
         }
         .container {
             display: flex;
@@ -21,186 +21,52 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .left, .right {
-            margin: 10px;
-        }
-        .left {
-            width: 300px;
-            text-align: center;
-        }
-        .right {
-            width: 200px;
-        }
-        .arrow {
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .description {
+        .order-info {
             margin-bottom: 10px;
-        }
-        .button {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .slider {
-            width: 100%;
-        }
-        .checkboxes {
-            display: flex;
-            flex-direction: column;
-        }
-        .error {
-            color: red;
-            display: none;
-        }
-        .hidden {
-            display: none;
-        }
-        .slider-value {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .order-details {
-            margin-top: 20px;
-            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="left">
-            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
-            <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
+        <h2>Order Confirmation</h2>
+        <div class="order-info">
+            <strong>First Name:</strong> <span id="firstName"></span>
         </div>
-        <div class="right">
-            <div class="description">Beautiful and fresh roses to brighten your day.</div>
-            <div class="description">Elegant roses perfect for any occasion.</div>
-            <div class="description">Vibrant roses that make a statement.</div>
-            <button class="button" onclick="calculateTotal()">Click Me For Total Cost</button>
-            <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
-            <label for="roseQuantity">How Many Roses Do You Want</label>
-            <div class="slider-value" id="sliderValue">0</div>
-            <div class="checkboxes">
-                <label><input type="checkbox" name="color" value="Red" onclick="checkSingleCheckbox(this)"> Red</label>
-                <label><input type="checkbox" name="color" value="Orange" onclick="checkSingleCheckbox(this)"> Orange</label>
-                <label><input type="checkbox" name="color" value="Yellow" onclick="checkSingleCheckbox(this)"> Yellow</label>
-                <label><input type="checkbox" name="color" value="Blue" onclick="checkSingleCheckbox(this)"> Blue</label>
-                <label><input type="checkbox" name="color" value="Green" onclick="checkSingleCheckbox(this)"> Green</label>
-                <label><input type="checkbox" name="color" value="Indigo" onclick="checkSingleCheckbox(this)"> Indigo</label>
-                <label><input type="checkbox" name="color" value="Violet" onclick="checkSingleCheckbox(this)"> Violet</label>
-                <label><input type="checkbox" name="color" value="Pink" onclick="checkSingleCheckbox(this)"> Pink</label>
-                <label><input type="checkbox" name="color" value="Black" onclick="checkSingleCheckbox(this)"> Black</label>
-                <label><input type="checkbox" name="color" value="White" onclick="checkSingleCheckbox(this)"> White</label>
-            </div>
-            <div class="error" id="error">No More Than One Color</div>
-            <div id="totalCost">Total Cost: $3</div>
-            <div id="orderSummary">What You Ordered: </div>
-            <form id="orderForm">
-                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <input type="text" name="address" id="address" placeholder="Address" required>
-                <input type="hidden" name="quantity" id="hiddenQuantity">
-                <input type="hidden" name="colors" id="hiddenColors">
-                <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <button class="button" type="submit">Send Order</button>
-            </form>
+        <div class="order-info">
+            <strong>Last Name:</strong> <span id="lastName"></span>
+        </div>
+        <div class="order-info">
+            <strong>Email:</strong> <span id="email"></span>
+        </div>
+        <div class="order-info">
+            <strong>Address:</strong> <span id="address"></span>
+        </div>
+        <div class="order-info">
+            <strong>Quantity:</strong> <span id="quantity"></span>
+        </div>
+        <div class="order-info">
+            <strong>Colors:</strong> <span id="colors"></span>
+        </div>
+        <div class="order-info">
+            <strong>Total Cost:</strong> <span id="totalCost"></span>
         </div>
     </div>
 
     <script>
-        let currentImage = 0;
-        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
-        const roseImage = document.getElementById('roseImage');
-        const checkboxes = document.querySelectorAll('input[name="color"]');
-        const error = document.getElementById('error');
-        const slider = document.getElementById('roseQuantity');
-        const sliderValue = document.getElementById('sliderValue');
-
-        function changeImage() {
-            currentImage = (currentImage + 1) % images.length;
-            roseImage.src = images[currentImage];
-            roseImage.style.opacity = 0;
-            setTimeout(() => {
-                roseImage.src = images[currentImage];
-                roseImage.style.opacity = 1;
-            }, 500);
+        // Function to get URL parameter value
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
 
-        function checkSingleCheckbox(clickedCheckbox) {
-            checkboxes.forEach(checkbox => {
-                if (checkbox !== clickedCheckbox) checkbox.checked = false;
-            });
-            if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
-                error.style.display = 'block';
-                setTimeout(() => error.style.display = 'none', 2000);
-            }
-            updateOrder();
-        }
-
-        function calculateTotal() {
-            const quantity = slider.value;
-            const colorCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-            const totalCost = quantity * 3 + colorCount * 3;
-            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
-            updateOrder();
-        }
-
-        function updateOrder() {
-            const quantity = slider.value;
-            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            sliderValue.innerText = quantity;
-            document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
-        }
-
-        function prepareOrder() {
-            const quantity = slider.value;
-            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            const totalCost = document.getElementById('totalCost').innerText;
-
-            document.getElementById('hiddenQuantity').value = quantity;
-            document.getElementById('hiddenColors').value = colors.join(', ');
-            document.getElementById('hiddenTotalCost').value = totalCost;
-        }
-
-        document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            prepareOrder();
-
-            const formData = new FormData(this);
-
-            // Convert form data to a JSON object
-            const orderData = {};
-            formData.forEach((value, key) => {
-                orderData[key] = value;
-            });
-
-            // Store order data in localStorage
-            localStorage.setItem('orderData', JSON.stringify(orderData));
-
-            // Simulate sending data to orders.html
-            fetch('orders.html', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                if (response.ok) {
-                    alert('Order successfully sent!');
-
-                    // Redirect to orders.html without actually sending data through URL
-                    window.location.href = 'orders.html';
-                } else {
-                    alert('Failed to send order.');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('Failed to send order.');
-            });
-        });
+        // Set the order details in the HTML
+        document.getElementById('firstName').innerText = getQueryParameter('firstName');
+        document.getElementById('lastName').innerText = getQueryParameter('lastName');
+        document.getElementById('email').innerText = getQueryParameter('email');
+        document.getElementById('address').innerText = getQueryParameter('address');
+        document.getElementById('quantity').innerText = getQueryParameter('quantity');
+        document.getElementById('colors').innerText = getQueryParameter('colors');
+        document.getElementById('totalCost').innerText = getQueryParameter('totalCost');
     </script>
 </body>
 </html>
