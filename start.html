@@ -1,187 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kay's Krochet</title>
-    <link rel="icon" href="https://cdn-icons-png.freepik.com/512/8446/8446379.png" type="image/png">
-    <style>
-        body {
-            font-family: 'Brush Script MT', cursive;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            overflow: auto; /* Enable scrollbars */
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffc0cb;
-            color: #fff;
-            padding: 10px 20px;
-        }
-        header .left {
-            display: flex;
-            align-items: center;
-        }
-        header .left img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-        header .right {
-            display: flex;
-            align-items: center;
-        }
-        header .right a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            position: relative;
-            cursor: pointer;
-            font-size: 24px; /* Increase emoji size */
-        }
-        header .right a:hover::after {
-            content: attr(data-hover);
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            color: #000;
-            padding: 5px;
-            border-radius: 3px;
-            white-space: nowrap;
-            font-size: 12px;
-        }
-        header h1 {
-            margin: 0;
-            color: #fff;
-        }
-        header h2 {
-            margin-top: 0;
-            font-size: 18px;
-            line-height: 1.6;
-            color: #a9a9a9; /* Darker grey */
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center; /* Center text in container */
-        }
-        .flowers {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            opacity: 0; /* Initially hidden for animation */
-            animation: fadeInSlide 1s ease-in-out forwards;
-        }
-        .flower {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            text-align: center;
-            width: 30%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: translateY(20px); /* Slide from bottom */
-            animation: slideIn 1s ease-in-out forwards;
-        }
-        .flower img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .flower h3, .flower button {
-            color: #000; /* Black */
-        }
-        .flower button {
-            background-color: #ff69b4;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .flower button:hover {
-            background-color: #ff1493; /* Darker pink on hover */
-        }
-        .custom {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            text-align: center;
-            width: 30%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: translateY(20px); /* Slide from bottom */
-            animation: slideIn 1s ease-in-out forwards;
-        }
-        .custom h3, .custom button {
-            color: #000; /* Black */
-        }
-        .custom button {
-            background-color: #ff69b4;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .custom button:hover {
-            background-color: #ff1493; /* Darker pink on hover */
-        }
-        footer {
-            background-color: #ffc0cb;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            font-size: 12px; /* Smaller font size */
-        }
-        .scroll-space {
-            height: 100px; /* Space for scrolling */
-        }
-        @keyframes fadeInSlide {
-            to {
-                opacity: 1;
-            }
-        }
-        @keyframes slideIn {
-            to {
-                transform: translateY(0);
-            }
-        }
-    </style>
-</head>
-<body>
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Kay's Krochet</title> 
+        <link rel="icon" href="https://cdn-icons-png.freepik.com/512/8446/8446379.png" type="image/png"> <style>flex; justify-content: space-between; align-items: center; background-color: #ffc0cb; color: #fff; padding: 10px 20px; } header .left { display: flex; align-items: center;
+            body { font-family: 'Brush Script MT', cursive; margin: 0; padding: 0; background-color: #f8f9fa; overflow: auto; /* Enable scrollbars */ } header { display:  } header .left img { width: 30px; height: 30px; margin-right: 10px; } header .right { display: flex; align-items: center; } header .right a { color: #fff; text-decoration: none; padding: 10px; position: relative; cursor: pointer; font-size: 24px; /* Increase emoji size */ } header .right a:hover::after { content: attr(data-hover); position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); background-color: #fff; color: #000; padding: 5px; border-radius: 3px; white-space: nowrap; font-size: 12px; } header h1 { margin: 0; color: #fff; } header h2 { margin-top: 0; font-size: 18px; line-height: 1.6; color: #a9a9a9; /* Darker grey */ } .container { width: 80%; margin: 0 auto; padding: 20px; text-align: center; /* Center text in container */ } .flowers { display: flex; flex-wrap: wrap; justify-content: space-around; opacity: 0; /* Initially hidden for animation */ animation: fadeInSlide 1s ease-in-out forwards; } .flower { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 10px; text-align: center; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transform: translateY(20px); /* Slide from bottom */ animation: slideIn 1s ease-in-out forwards; } .flower img { max-width: 100%; height: auto; border-radius: 5px; } .flower h3, .flower button { color: #000; /* Black */ } .flower button { background-color: #ff69b4; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin-top: 10px; cursor: pointer; border-radius: 5px; } .flower button:hover { background-color: #ff1493; /* Darker pink on hover */ } .custom { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 10px; text-align: center; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transform: translateY(20px); /* Slide from bottom */ animation: slideIn 1s ease-in-out forwards; } .custom h3, .custom button { color: #000; /* Black */ } .custom button { background-color: #ff69b4; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin-top: 10px; cursor: pointer; border-radius: 5px; } .custom button:hover { background-color: #ff1493; /* Darker pink on hover */ } footer { background-color: #ffc0cb; color: #fff; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0; font-size: 12px; /* Smaller font size */ } .scroll-space { height: 100px; /* Space for scrolling */ } @keyframes fadeInSlide { to { opacity: 1; } } @keyframes slideIn { to { transform: translateY(0); } } </style> </head> <body> <header> <div class="left"> <img src="https://cdn-icons-png.freepik.com/512/8446/8446379.png" alt="Favicon"> <h1>Kay's Krochet</h1> </div> <div class="right"> <a href="cart.html" data-hover="Your Cart">🛒</a> <a href="info.html" data-hover="Contact Information">📞</a> <a href="orders.html" data-hover="Orders">📦</a> <a href="start.html" data-hover="Home">🏠</a> </div> 
+</header>
     <header>
-        <div class="left">
-            <img src="https://cdn-icons-png.freepik.com/512/8446/8446379.png" alt="Favicon">
-            <h1>Kay's Krochet</h1>
-        </div>
-        <div class="right">
-            <a href="cart.html" data-hover="Your Cart">🛒</a>
-            <a href="info.html" data-hover="Contact Information">📞</a>
-            <a href="orders.html" data-hover="Orders">📦</a>
-            <a href="start.html" data-hover="Home">🏠</a>
-        </div>
+        <h1>Kay's Krochet</h1>
+        <h2>
+            🌸 Welcome to Kay's Krochet! 🌸<br><br>
+            At Kay's Krochet, we transform the timeless art of crochet into beautiful, handmade floral creations. Our diverse collection of crocheted flowers ranges from the classic elegance of roses and calla lilies to the vibrant charm of sunflowers and daisies. Whether you're looking for delicate lavender, striking carnations, or realistic and whimsical tulips, you'll find them all here.<br><br>
+            Each flower is meticulously crafted with love, attention to detail, and a passion for bringing nature’s beauty into your home. Kay's Krochet is more than just flowers; it's about giving you pieces that add warmth, personality, and a touch of magic to any space.<br><br>
+            Embrace the beauty of everlasting blooms and add a bit of handmade charm to your life with Kay's Krochet.
+        </h2>
     </header>
-
+    
     <div class="container">
-        <h2 style="color: #000;">Our Collection</h2>
+        <h2>Our Collection</h2>
         <div class="flowers">
             <div class="flower">
                 <a href="rose.html"><img src="rose.jpg" alt="Rose"></a>
@@ -229,11 +66,21 @@
                 <a href="openedtulip.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
-                <h3>Bouquette</h3>
-                <a href="bouquette.html"><button>Order Bouquette</button></a>
+                <a href="bouquette.html"><img src="bouquette.jpg" alt="Bouquette Of Flowers"></a>
+                <h3>Bouquette of Flowers</h3>
+                <a href="bouquette.html"><button>Order This Flower</button></a>
             </div>
             <div class="custom">
                 <h3>Have Something Customly Crocheted</h3>
                 <a href="custom.html"><button>Order Custom Crochet</button></a>
             </div>
         </div>
+    </div>
+    
+    <div class="scroll-space"></div>
+    
+    <footer>
+        <p>&copy; 2025 Kay's Krochet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
