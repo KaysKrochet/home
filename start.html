@@ -1,12 +1,127 @@
 <!DOCTYPE html>
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>Kay's Krochet</title> 
-        <link rel="icon" href="https://cdn-icons-png.freepik.com/512/8446/8446379.png" type="image/png"> <style>flex; justify-content: space-between; align-items: center; background-color: #ffc0cb; color: #fff; padding: 10px 20px; } header .left { display: flex; align-items: center;
-            body { font-family: 'Brush Script MT', cursive; margin: 0; padding: 0; background-color: #f8f9fa; overflow: auto; /* Enable scrollbars */ } header { display:  } header .left img { width: 30px; height: 30px; margin-right: 10px; } header .right { display: flex; align-items: center; } header .right a { color: #fff; text-decoration: none; padding: 10px; position: relative; cursor: pointer; font-size: 24px; /* Increase emoji size */ } header .right a:hover::after { content: attr(data-hover); position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); background-color: #fff; color: #000; padding: 5px; border-radius: 3px; white-space: nowrap; font-size: 12px; } header h1 { margin: 0; color: #fff; } header h2 { margin-top: 0; font-size: 18px; line-height: 1.6; color: #a9a9a9; /* Darker grey */ } .container { width: 80%; margin: 0 auto; padding: 20px; text-align: center; /* Center text in container */ } .flowers { display: flex; flex-wrap: wrap; justify-content: space-around; opacity: 0; /* Initially hidden for animation */ animation: fadeInSlide 1s ease-in-out forwards; } .flower { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 10px; text-align: center; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transform: translateY(20px); /* Slide from bottom */ animation: slideIn 1s ease-in-out forwards; } .flower img { max-width: 100%; height: auto; border-radius: 5px; } .flower h3, .flower button { color: #000; /* Black */ } .flower button { background-color: #ff69b4; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin-top: 10px; cursor: pointer; border-radius: 5px; } .flower button:hover { background-color: #ff1493; /* Darker pink on hover */ } .custom { border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 10px; text-align: center; width: 30%; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transform: translateY(20px); /* Slide from bottom */ animation: slideIn 1s ease-in-out forwards; } .custom h3, .custom button { color: #000; /* Black */ } .custom button { background-color: #ff69b4; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin-top: 10px; cursor: pointer; border-radius: 5px; } .custom button:hover { background-color: #ff1493; /* Darker pink on hover */ } footer { background-color: #ffc0cb; color: #fff; text-align: center; padding: 10px 0; position: fixed; width: 100%; bottom: 0; font-size: 12px; /* Smaller font size */ } .scroll-space { height: 100px; /* Space for scrolling */ } @keyframes fadeInSlide { to { opacity: 1; } } @keyframes slideIn { to { transform: translateY(0); } } </style> </head> <body> <header> <div class="left"> <img src="https://cdn-icons-png.freepik.com/512/8446/8446379.png" alt="Favicon"> <h1>Kay's Krochet</h1> </div> <div class="right"> <a href="cart.html" data-hover="Your Cart">🛒</a> <a href="info.html" data-hover="Contact Information">📞</a> <a href="orders.html" data-hover="Orders">📦</a> <a href="start.html" data-hover="Home">🏠</a> </div> 
-</header>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kay's Krochet</title>
+    <link rel="icon" href="https://cdn-icons-png.freepik.com/512/8446/8446379.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Brush Script MT', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            overflow: auto; /* Enable scrollbars */
+        }
+        header {
+            background-color: #ffc0cb;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h2 {
+            margin-top: 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center; /* Center text in container */
+        }
+        .flowers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            opacity: 0; /* Initially hidden for animation */
+            animation: fadeInSlide 1s ease-in-out forwards;
+        }
+        .flower {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px); /* Slide from bottom */
+            animation: slideIn 1s ease-in-out forwards;
+        }
+        .flower img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .flower button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .flower button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+        }
+        .custom {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px); /* Slide from bottom */
+            animation: slideIn 1s ease-in-out forwards;
+        }
+        .custom button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .custom button:hover {
+            background-color: #ff1493; /* Darker pink on hover */
+        }
+        footer {
+            background-color: #ffc0cb;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 12px; /* Smaller font size */
+        }
+        .scroll-space {
+            height: 100px; /* Space for scrolling */
+        }
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
     <header>
         <h1>Kay's Krochet</h1>
         <h2>
@@ -26,9 +141,9 @@
                 <a href="rose.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
-                <a href="calalily.html"><img src="calalily.jpg" alt="Calalily"></a>
-                <h3>Calalily</h3>
-                <a href="calalily.html"><button>Order This Flower</button></a>
+                <a href="callalily.html"><img src="callalily.jpg" alt="Calla Lily"></a>
+                <h3>Calla Lily</h3>
+                <a href="callalily.html"><button>Order This Flower</button></a>
             </div>
             <div class="flower">
                 <a href="closedtulip.html"><img src="closedtulip.jpg" alt="Closed Tulip"></a>
