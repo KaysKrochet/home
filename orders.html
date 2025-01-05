@@ -53,20 +53,19 @@
     </div>
 
     <script>
-        // Function to get URL parameter value
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
+        window.onload = function() {
+            // Parse the order data from localStorage
+            const orderData = JSON.parse(localStorage.getItem('orderData'));
 
-        // Set the order details in the HTML
-        document.getElementById('firstName').innerText = getQueryParameter('firstName');
-        document.getElementById('lastName').innerText = getQueryParameter('lastName');
-        document.getElementById('email').innerText = getQueryParameter('email');
-        document.getElementById('address').innerText = getQueryParameter('address');
-        document.getElementById('quantity').innerText = getQueryParameter('quantity');
-        document.getElementById('colors').innerText = getQueryParameter('colors');
-        document.getElementById('totalCost').innerText = getQueryParameter('totalCost');
+            // Set the order details in the HTML
+            document.getElementById('firstName').innerText = orderData.firstName;
+            document.getElementById('lastName').innerText = orderData.lastName;
+            document.getElementById('email').innerText = orderData.email;
+            document.getElementById('address').innerText = orderData.address;
+            document.getElementById('quantity').innerText = orderData.quantity;
+            document.getElementById('colors').innerText = orderData.colors;
+            document.getElementById('totalCost').innerText = orderData.totalCost;
+        }
     </script>
 </body>
 </html>
