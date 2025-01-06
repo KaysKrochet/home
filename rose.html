@@ -5,7 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rose Shop</title>
     <style>
-        /* Your existing CSS */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(270deg, red, pink);
+            background-size: 400% 400%;
+            animation: gradientFlow 10s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row; /* Updated to row to align left and right sections */
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .left {
+            width: 50%; /* Adjusted width */
+            margin-right: 20px;
+            text-align: center; /* Centered content */
+        }
+
+        .right {
+            width: 50%; /* Adjusted width */
+        }
+
+        .arrow {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .description {
+            margin-bottom: 10px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .checkboxes {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .order-details {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0055;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #ff3377;
+        }
     </style>
 </head>
 <body>
@@ -18,11 +105,11 @@
             <div class="description">Beautiful and fresh roses to brighten your day.</div>
             <div class="description">Elegant roses perfect for any occasion.</div>
             <div class="description">Vibrant roses that make a statement.</div>
+            <label for="roseQuantity">How Many Roses You Want</label>
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
-            <label for="roseQuantity">How Many Roses Do You Want</label>
             <div class="slider-value" id="sliderValue">0</div>
             <div class="checkboxes">
-                <!-- Your existing checkboxes -->
+                <!-- Your existing checkboxes here -->
             </div>
             <div class="error" id="error">No More Than One Color</div>
             <div id="totalCost">Total Cost: $0</div>
@@ -35,17 +122,59 @@
                 <input type="hidden" name="quantity" id="hiddenQuantity">
                 <input type="hidden" name="colors" id="hiddenColors">
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <input type="hidden" name="flowerName" id="hiddenFlowerName"> <!-- New hidden field for flower name -->
+                <input type="hidden" name="flowerName" id="hiddenFlowerName">
                 <button class="button" type="submit">Send Order</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Your existing JavaScript
+        let currentImage = 0;
+        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
+        const roseImage = document.getElementById('roseImage');
+        const checkboxes = document.querySelectorAll('input[name="color"]');
+        const error = document.getElementById('error');
+        const slider = document.getElementById('roseQuantity');
+        const sliderValue = document.getElementById('sliderValue');
+
+        function changeImage() {
+            currentImage = (currentImage + 1) % images.length;
+            roseImage.src = images[currentImage];
+            roseImage.style.opacity = 0;
+            setTimeout(() => {
+                roseImage.src = images[currentImage];
+                roseImage.style.opacity = 1;
+            }, 500);
+        }
+
+        function checkSingleCheckbox(clickedCheckbox) {
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== clickedCheckbox) checkbox.checked = false;
+            });
+            if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
+                error.style.display = 'block';
+                setTimeout(() => error.style.display = 'none', 2000);
+            }
+            updateOrder();
+        }
+
+        function updateOrder() {
+            const quantity = slider.value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = quantity * 3 + colors.length * 3;
+            sliderValue.innerText = quantity;
+            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
+            document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
+        }
 
         function prepareOrder() {
-            // Existing code to prepare the order
+            const quantity = slider.value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = document.getElementById('totalCost').innerText;
+
+            document.getElementById('hiddenQuantity').value = quantity;
+            document.getElementById('hiddenColors').value = colors.join(', ');
+            document.getElementById('hiddenTotalCost').value = totalCost;
             document.getElementById('hiddenFlowerName').value = "Rose"; // Set the flower name
         }
 
@@ -55,19 +184,15 @@
 
             const formData = new FormData(this);
 
-            // Convert form data to a JSON object
             const orderData = {};
             formData.forEach((value, key) => {
                 orderData[key] = value;
             });
 
-            // Store order data in localStorage
             localStorage.setItem('orderData', JSON.stringify(orderData));
 
-            // Simulate successful order submission
             alert('Order successfully sent!');
 
-            // Redirect to orders.html
             window.location.href = 'thanks.html';
         });
     </script>
