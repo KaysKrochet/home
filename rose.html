@@ -1,179 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rose Shop</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: pink; /* Changed background color to pink */
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .left, .right {
-            margin: 10px;
-        }
-        .left {
-            width: 300px;
-            text-align: center;
-        }
-        .right {
-            width: 200px;
-        }
-        .arrow {
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .description {
-            margin-bottom: 10px;
-        }
-        .slider {
-            width: 100%;
-        }
-        .checkboxes {
-            display: flex;
-            flex-direction: column;
-        }
-        .error {
-            color: red;
-            display: none;
-        }
-        .hidden {
-            display: none;
-        }
-        .slider-value {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .order-details {
-            margin-top: 20px;
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="left">
-            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
-            <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
-        </div>
-        <div class="right">
-            <div class="description">Beautiful and fresh roses to brighten your day.</div>
-            <div class="description">Elegant roses perfect for any occasion.</div>
-            <div class="description">Vibrant roses that make a statement.</div>
-            <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
-            <label for="roseQuantity">How Many Roses Do You Want</label>
-            <div class="slider-value" id="sliderValue">0</div>
-            <div class="checkboxes">
-                <label><input type="checkbox" name="color" value="Red" onclick="checkSingleCheckbox(this)"> Red</label>
-                <label><input type="checkbox" name="color" value="Orange" onclick="checkSingleCheckbox(this)"> Orange</label>
-                <label><input type="checkbox" name="color" value="Yellow" onclick="checkSingleCheckbox(this)"> Yellow</label>
-                <label><input type="checkbox" name="color" value="Blue" onclick="checkSingleCheckbox(this)"> Blue</label>
-                <label><input type="checkbox" name="color" value="Green" onclick="checkSingleCheckbox(this)"> Green</label>
-                <label><input type="checkbox" name="color" value="Indigo" onclick="checkSingleCheckbox(this)"> Indigo</label>
-                <label><input type="checkbox" name="color" value="Violet" onclick="checkSingleCheckbox(this)"> Violet</label>
-                <label><input type="checkbox" name="color" value="Pink" onclick="checkSingleCheckbox(this)"> Pink</label>
-                <label><input type="checkbox" name="color" value="Black" onclick="checkSingleCheckbox(this)"> Black</label>
-                <label><input type="checkbox" name="color" value="White" onclick="checkSingleCheckbox(this)"> White</label>
-            </div>
-            <div class="error" id="error">No More Than One Color</div>
-            <div id="totalCost">Total Cost: $0</div>
-            <div id="orderSummary">What You Ordered: </div>
-            <form id="orderForm">
-                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <input type="text" name="address" id="address" placeholder="Address" required>
-                <input type="hidden" name="quantity" id="hiddenQuantity">
-                <input type="hidden" name="colors" id="hiddenColors">
-                <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <button class="button" type="submit">Send Order</button>
-            </form>
-        </div>
-    </div>
+<!-- Add a hidden input for the order date -->
+<input type="hidden" name="orderDate" id="hiddenOrderDate">
 
-    <script>
-        let currentImage = 0;
-        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
-        const roseImage = document.getElementById('roseImage');
-        const checkboxes = document.querySelectorAll('input[name="color"]');
-        const error = document.getElementById('error');
-        const slider = document.getElementById('roseQuantity');
-        const sliderValue = document.getElementById('sliderValue');
+<script>
+    let currentImage = 0;
+    const images = ["Rose.png", "Rose2.png", "Rose3.png"];
+    const roseImage = document.getElementById('roseImage');
+    const checkboxes = document.querySelectorAll('input[name="color"]');
+    const error = document.getElementById('error');
+    const slider = document.getElementById('roseQuantity');
+    const sliderValue = document.getElementById('sliderValue');
 
-        function changeImage() {
-            currentImage = (currentImage + 1) % images.length;
+    function changeImage() {
+        currentImage = (currentImage + 1) % images.length;
+        roseImage.src = images[currentImage];
+        roseImage.style.opacity = 0;
+        setTimeout(() => {
             roseImage.src = images[currentImage];
-            roseImage.style.opacity = 0;
-            setTimeout(() => {
-                roseImage.src = images[currentImage];
-                roseImage.style.opacity = 1;
-            }, 500);
+            roseImage.style.opacity = 1;
+        }, 500);
+    }
+
+    function checkSingleCheckbox(clickedCheckbox) {
+        checkboxes.forEach(checkbox => {
+            if (checkbox !== clickedCheckbox) checkbox.checked = false;
+        });
+        if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
+            error.style.display = 'block';
+            setTimeout(() => error.style.display = 'none', 2000);
         }
+        updateOrder();
+    }
 
-        function checkSingleCheckbox(clickedCheckbox) {
-            checkboxes.forEach(checkbox => {
-                if (checkbox !== clickedCheckbox) checkbox.checked = false;
-            });
-            if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
-                error.style.display = 'block';
-                setTimeout(() => error.style.display = 'none', 2000);
-            }
-            updateOrder();
-        }
+    function updateOrder() {
+        const quantity = slider.value;
+        const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+        const totalCost = quantity * 3 + colors.length * 3;
+        sliderValue.innerText = quantity;
+        document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
+        document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
+    }
 
-        function updateOrder() {
-            const quantity = slider.value;
-            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            const totalCost = quantity * 3 + colors.length * 3;
-            sliderValue.innerText = quantity;
-            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
-            document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
-        }
+    function prepareOrder() {
+        const quantity = slider.value;
+        const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+        const totalCost = document.getElementById('totalCost').innerText;
 
-        function prepareOrder() {
-            const quantity = slider.value;
-            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            const totalCost = document.getElementById('totalCost').innerText;
+        const date = new Date().toLocaleString();
 
-            document.getElementById('hiddenQuantity').value = quantity;
-            document.getElementById('hiddenColors').value = colors.join(', ');
-            document.getElementById('hiddenTotalCost').value = totalCost;
-        }
+        document.getElementById('hiddenQuantity').value = quantity;
+        document.getElementById('hiddenColors').value = colors.join(', ');
+        document.getElementById('hiddenTotalCost').value = totalCost;
+        document.getElementById('hiddenOrderDate').value = date;
+    }
 
-       document.getElementById('orderForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    prepareOrder();
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        prepareOrder();
 
-    const formData = new FormData(this);
+        const formData = new FormData(this);
 
-    // Convert form data to a JSON object
-    const orderData = {};
-    formData.forEach((value, key) => {
-        orderData[key] = value;
+        const orderData = {};
+        formData.forEach((value, key) => {
+            orderData[key] = value;
+        });
+
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push(orderData);
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        alert('Order successfully sent!');
+        window.location.href = 'thanks.html';
     });
-
-    // Store order data in localStorage
-    localStorage.setItem('orderData', JSON.stringify(orderData));
-
-    // Simulate successful order submission
-    alert('Order successfully sent!');
-
-    // Redirect to orders.html
-    window.location.href = 'thanks.html';
-});
-
-    </script>
-</body>
-</html>
+</script>
