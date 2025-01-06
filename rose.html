@@ -1,74 +1,75 @@
-<!-- Add a hidden input for the order date -->
-<input type="hidden" name="orderDate" id="hiddenOrderDate">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Shop</title>
+    <style>
+        /* Your existing CSS */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
+            <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
+        </div>
+        <div class="right">
+            <div class="description">Beautiful and fresh roses to brighten your day.</div>
+            <div class="description">Elegant roses perfect for any occasion.</div>
+            <div class="description">Vibrant roses that make a statement.</div>
+            <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
+            <label for="roseQuantity">How Many Roses Do You Want</label>
+            <div class="slider-value" id="sliderValue">0</div>
+            <div class="checkboxes">
+                <!-- Your existing checkboxes -->
+            </div>
+            <div class="error" id="error">No More Than One Color</div>
+            <div id="totalCost">Total Cost: $0</div>
+            <div id="orderSummary">What You Ordered: </div>
+            <form id="orderForm">
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="address" id="address" placeholder="Address" required>
+                <input type="hidden" name="quantity" id="hiddenQuantity">
+                <input type="hidden" name="colors" id="hiddenColors">
+                <input type="hidden" name="totalCost" id="hiddenTotalCost">
+                <input type="hidden" name="flowerName" id="hiddenFlowerName"> <!-- New hidden field for flower name -->
+                <button class="button" type="submit">Send Order</button>
+            </form>
+        </div>
+    </div>
 
-<script>
-    let currentImage = 0;
-    const images = ["Rose.png", "Rose2.png", "Rose3.png"];
-    const roseImage = document.getElementById('roseImage');
-    const checkboxes = document.querySelectorAll('input[name="color"]');
-    const error = document.getElementById('error');
-    const slider = document.getElementById('roseQuantity');
-    const sliderValue = document.getElementById('sliderValue');
+    <script>
+        // Your existing JavaScript
 
-    function changeImage() {
-        currentImage = (currentImage + 1) % images.length;
-        roseImage.src = images[currentImage];
-        roseImage.style.opacity = 0;
-        setTimeout(() => {
-            roseImage.src = images[currentImage];
-            roseImage.style.opacity = 1;
-        }, 500);
-    }
-
-    function checkSingleCheckbox(clickedCheckbox) {
-        checkboxes.forEach(checkbox => {
-            if (checkbox !== clickedCheckbox) checkbox.checked = false;
-        });
-        if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
-            error.style.display = 'block';
-            setTimeout(() => error.style.display = 'none', 2000);
+        function prepareOrder() {
+            // Existing code to prepare the order
+            document.getElementById('hiddenFlowerName').value = "Rose"; // Set the flower name
         }
-        updateOrder();
-    }
 
-    function updateOrder() {
-        const quantity = slider.value;
-        const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-        const totalCost = quantity * 3 + colors.length * 3;
-        sliderValue.innerText = quantity;
-        document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
-        document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
-    }
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            prepareOrder();
 
-    function prepareOrder() {
-        const quantity = slider.value;
-        const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-        const totalCost = document.getElementById('totalCost').innerText;
+            const formData = new FormData(this);
 
-        const date = new Date().toLocaleString();
+            // Convert form data to a JSON object
+            const orderData = {};
+            formData.forEach((value, key) => {
+                orderData[key] = value;
+            });
 
-        document.getElementById('hiddenQuantity').value = quantity;
-        document.getElementById('hiddenColors').value = colors.join(', ');
-        document.getElementById('hiddenTotalCost').value = totalCost;
-        document.getElementById('hiddenOrderDate').value = date;
-    }
+            // Store order data in localStorage
+            localStorage.setItem('orderData', JSON.stringify(orderData));
 
-    document.getElementById('orderForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        prepareOrder();
+            // Simulate successful order submission
+            alert('Order successfully sent!');
 
-        const formData = new FormData(this);
-
-        const orderData = {};
-        formData.forEach((value, key) => {
-            orderData[key] = value;
+            // Redirect to orders.html
+            window.location.href = 'thanks.html';
         });
-
-        let orders = JSON.parse(localStorage.getItem('orders')) || [];
-        orders.push(orderData);
-        localStorage.setItem('orders', JSON.stringify(orders));
-
-        alert('Order successfully sent!');
-        window.location.href = 'thanks.html';
-    });
-</script>
+    </script>
+</body>
+</html>
