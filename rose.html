@@ -109,7 +109,7 @@
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
             <div class="slider-value" id="sliderValue">0</div>
             <div class="checkboxes">
-                <label><input type="checkbox" name="color" value=" Default (Red)" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
+                <label><input type="checkbox" name="color" value="Red" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
                 <label><input type="checkbox" name="color" value="Orange" onclick="changeRoseColor(this)"> Orange</label>
                 <label><input type="checkbox" name="color" value="Yellow" onclick="changeRoseColor(this)"> Yellow</label>
                 <label><input type="checkbox" name="color" value="Blue" onclick="changeRoseColor(this)"> Blue</label>
@@ -218,11 +218,4 @@
                 orderData[key] = value;
             });
 
-            localStorage.setItem('orderData', JSON.stringify(orderData));
-
-            alert('Order successfully sent!');
-
-            window.location.href = 'thanks.html';
-        });
-
-        // Set initial[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
+            localStorage.setItem('order[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
