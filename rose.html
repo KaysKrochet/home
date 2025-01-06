@@ -108,7 +108,7 @@
 <body>
     <div class="container">
         <div class="left">
-            <img id="roseImage" src="RoseRed.png" alt="Rose" width="100%"> <!-- Set initial image to red rose -->
+            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
             <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
         </div>
         <div class="right">
@@ -138,12 +138,10 @@
                 <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <input type="text" name="address" id="address" placeholder="Address" required>
-                <textarea name="specialInstructions" id="specialInstructions" class="special-instructions" placeholder="Special Instructions"></textarea> <!-- Special instructions box -->
+                <textarea name="specialInstructions" id="specialInstructions" class="special-instructions" placeholder="Special Instructions"></textarea>
                 <input type="hidden" name="quantity" id="hiddenQuantity">
                 <input type="hidden" name="colors" id="hiddenColors">
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <input type="hidden" name="flowerName" id="hiddenFlowerName">
-                <input type="hidden" name="orderDate" id="hiddenOrderDate">
                 <button class="button" type="submit">Send Order</button>
             </form>
         </div>
@@ -151,18 +149,7 @@
 
     <script>
         let currentImage = 0;
-        const images = {
-            "Red": "RoseRed.png",
-            "Orange": "RoseOrange.png",
-            "Yellow": "RoseYellow.png",
-            "Blue": "RoseBlue.png",
-            "Green": "RoseGreen.png",
-            "Indigo": "RoseIndigo.png",
-            "Violet": "RoseViolet.png",
-            "Pink": "RosePink.png",
-            "Black": "RoseBlack.png",
-            "White": "RoseWhite.png"
-        };
+        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
         const roseImage = document.getElementById('roseImage');
         const checkboxes = document.querySelectorAll('input[name="color"]');
         const error = document.getElementById('error');
@@ -170,11 +157,11 @@
         const sliderValue = document.getElementById('sliderValue');
 
         function changeImage() {
-            currentImage = (currentImage + 1) % Object.values(images).length;
-            roseImage.src = Object.values(images)[currentImage];
+            currentImage = (currentImage + 1) % images.length;
+            roseImage.src = images[currentImage];
             roseImage.style.opacity = 0;
             setTimeout(() => {
-                roseImage.src = Object.values(images)[currentImage];
+                roseImage.src = images[currentImage];
                 roseImage.style.opacity = 1;
             }, 500);
         }
@@ -206,11 +193,30 @@
             const quantity = slider.value;
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
             const totalCost = document.getElementById('totalCost').innerText;
-            const specialInstructions = document.getElementById('specialInstructions').value;
-            const orderDate = new Date().toLocaleString();
 
             document.getElementById('hiddenQuantity').value = quantity;
             document.getElementById('hiddenColors').value = colors.join(', ');
             document.getElementById('hiddenTotalCost').value = totalCost;
-            document.getElementById('hiddenFlowerName').value = "Rose"; // Set the flower name
-            document.getElementById('hiddenOrder[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            prepareOrder();
+
+            const formData = new FormData(this);
+
+            const orderData = {};
+            formData.forEach((value, key) => {
+                orderData[key] = value;
+            });
+
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+
+            alert('Order successfully sent!');
+
+            window.location.href = 'orders.html';
+        });
+
+    </script>
+</body>
+</html>
