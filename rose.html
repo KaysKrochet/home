@@ -24,7 +24,7 @@
 
         .container {
             display: flex;
-            flex-direction: row; /* Updated to row to align left and right sections */
+            flex-direction: row; 
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
@@ -32,13 +32,13 @@
         }
 
         .left {
-            width: 50%; /* Adjusted width */
+            width: 50%;
             margin-right: 20px;
-            text-align: center; /* Centered content */
+            text-align: center;
         }
 
         .right {
-            width: 50%; /* Adjusted width */
+            width: 50%;
         }
 
         .arrow {
@@ -109,7 +109,16 @@
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
             <div class="slider-value" id="sliderValue">0</div>
             <div class="checkboxes">
-                <!-- Your existing checkboxes here -->
+                <label><input type="checkbox" name="color" value="Red" onclick="changeRoseColor(this)"> Red</label>
+                <label><input type="checkbox" name="color" value="Orange" onclick="changeRoseColor(this)"> Orange</label>
+                <label><input type="checkbox" name="color" value="Yellow" onclick="changeRoseColor(this)"> Yellow</label>
+                <label><input type="checkbox" name="color" value="Blue" onclick="changeRoseColor(this)"> Blue</label>
+                <label><input type="checkbox" name="color" value="Green" onclick="changeRoseColor(this)"> Green</label>
+                <label><input type="checkbox" name="color" value="Indigo" onclick="changeRoseColor(this)"> Indigo</label>
+                <label><input type="checkbox" name="color" value="Violet" onclick="changeRoseColor(this)"> Violet</label>
+                <label><input type="checkbox" name="color" value="Pink" onclick="changeRoseColor(this)"> Pink</label>
+                <label><input type="checkbox" name="color" value="Black" onclick="changeRoseColor(this)"> Black</label>
+                <label><input type="checkbox" name="color" value="White" onclick="changeRoseColor(this)"> White</label>
             </div>
             <div class="error" id="error">No More Than One Color</div>
             <div id="totalCost">Total Cost: $0</div>
@@ -122,7 +131,7 @@
                 <input type="hidden" name="quantity" id="hiddenQuantity">
                 <input type="hidden" name="colors" id="hiddenColors">
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <input type="hidden" name="flowerName" id="hiddenFlowerName">
+                <input type="hidden" name="flowerName" id="hiddenFlowerName"> <!-- New hidden field for flower name -->
                 <button class="button" type="submit">Send Order</button>
             </form>
         </div>
@@ -130,7 +139,18 @@
 
     <script>
         let currentImage = 0;
-        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
+        const images = {
+            "Red": "RoseRed.png",
+            "Orange": "RoseOrange.png",
+            "Yellow": "RoseYellow.png",
+            "Blue": "RoseBlue.png",
+            "Green": "RoseGreen.png",
+            "Indigo": "RoseIndigo.png",
+            "Violet": "RoseViolet.png",
+            "Pink": "RosePink.png",
+            "Black": "RoseBlack.png",
+            "White": "RoseWhite.png"
+        };
         const roseImage = document.getElementById('roseImage');
         const checkboxes = document.querySelectorAll('input[name="color"]');
         const error = document.getElementById('error');
@@ -138,22 +158,25 @@
         const sliderValue = document.getElementById('sliderValue');
 
         function changeImage() {
-            currentImage = (currentImage + 1) % images.length;
-            roseImage.src = images[currentImage];
+            currentImage = (currentImage + 1) % Object.values(images).length;
+            roseImage.src = Object.values(images)[currentImage];
             roseImage.style.opacity = 0;
             setTimeout(() => {
-                roseImage.src = images[currentImage];
+                roseImage.src = Object.values(images)[currentImage];
                 roseImage.style.opacity = 1;
             }, 500);
         }
 
-        function checkSingleCheckbox(clickedCheckbox) {
+        function changeRoseColor(clickedCheckbox) {
             checkboxes.forEach(checkbox => {
                 if (checkbox !== clickedCheckbox) checkbox.checked = false;
             });
             if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
                 error.style.display = 'block';
                 setTimeout(() => error.style.display = 'none', 2000);
+            } else {
+                const selectedColor = Array.from(checkboxes).find(checkbox => checkbox.checked).value;
+                roseImage.src = images[selectedColor];
             }
             updateOrder();
         }
