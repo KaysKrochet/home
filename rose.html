@@ -93,6 +93,16 @@
         .button:hover {
             background-color: #ff3377;
         }
+
+        .special-instructions {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: grey;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +119,7 @@
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
             <div class="slider-value" id="sliderValue">0</div>
             <div class="checkboxes">
-                <label><input type="checkbox" name="color" value="Red" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
+                <label><input type="checkbox" name="color" value="Default (Red)" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
                 <label><input type="checkbox" name="color" value="Orange" onclick="changeRoseColor(this)"> Orange</label>
                 <label><input type="checkbox" name="color" value="Yellow" onclick="changeRoseColor(this)"> Yellow</label>
                 <label><input type="checkbox" name="color" value="Blue" onclick="changeRoseColor(this)"> Blue</label>
@@ -128,6 +138,7 @@
                 <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
                 <input type="email" name="email" id="email" placeholder="Email" required>
                 <input type="text" name="address" id="address" placeholder="Address" required>
+                <textarea name="specialInstructions" id="specialInstructions" class="special-instructions" placeholder="Special Instructions"></textarea> <!-- Special instructions box -->
                 <input type="hidden" name="quantity" id="hiddenQuantity">
                 <input type="hidden" name="colors" id="hiddenColors">
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
@@ -171,13 +182,8 @@
             checkboxes.forEach(checkbox => {
                 if (checkbox !== clickedCheckbox) checkbox.checked = false;
             });
-            if (Array.from(checkboxes).filter(checkbox => checkbox.checked).length > 1) {
-                error.style.display = 'block';
-                setTimeout(() => error.style.display = 'none', 2000);
-            } else {
-                const selectedColor = Array.from(checkboxes).find(checkbox => checkbox.checked).value;
-                roseImage.src = images[selectedColor];
-            }
+            const selectedColor = Array.from(checkboxes).find(checkbox => checkbox.checked)?.value || 'Red';
+            roseImage.src = images[selectedColor];
             updateOrder();
         }
 
@@ -186,7 +192,6 @@
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
             let totalCost = quantity * 3;
 
-            // If the color is not red, add extra cost
             if (colors.length > 0 && colors[0] !== 'Red') {
                 totalCost += colors.length * 3;
             }
@@ -200,22 +205,14 @@
             const quantity = slider.value;
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
             const totalCost = document.getElementById('totalCost').innerText;
+            const specialInstructions = document.getElementById('specialInstructions').value;
 
             document.getElementById('hiddenQuantity').value = quantity;
             document.getElementById('hiddenColors').value = colors.join(', ');
             document.getElementById('hiddenTotalCost').value = totalCost;
             document.getElementById('hiddenFlowerName').value = "Rose"; // Set the flower name
+            document.getElementById('hiddenSpecialInstructions').value = specialInstructions;
         }
 
         document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            prepareOrder();
-
-            const formData = new FormData(this);
-
-            const orderData = {};
-            formData.forEach((value, key) => {
-                orderData[key] = value;
-            });
-
-            localStorage.setItem('order[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
+           [_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
