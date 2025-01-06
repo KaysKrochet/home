@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
+    <title>Rose Shop</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,67 +11,207 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background: linear-gradient(270deg, red, pink);
+            background-size: 400% 400%;
+            animation: gradientFlow 10s ease infinite;
         }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row; 
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .order-info {
+
+        .left {
+            width: 50%;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .right {
+            width: 50%;
+        }
+
+        .arrow {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .description {
             margin-bottom: 10px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .checkboxes {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .order-details {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0055;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #ff3377;
+        }
+
+        .special-instructions {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: grey;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Order Confirmation</h2>
-        <div class="order-info">
-            <strong>First Name:</strong> <span id="firstName"></span>
+        <div class="left">
+            <img id="roseImage" src="RoseRed.png" alt="Rose" width="100%"> <!-- Set initial image to red rose -->
+            <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
         </div>
-        <div class="order-info">
-            <strong>Last Name:</strong> <span id="lastName"></span>
-        </div>
-        <div class="order-info">
-            <strong>Email:</strong> <span id="email"></span>
-        </div>
-        <div class="order-info">
-            <strong>Address:</strong> <span id="address"></span>
-        </div>
-        <div class="order-info">
-            <strong>Quantity:</strong> <span id="quantity"></span>
-        </div>
-        <div class="order-info">
-            <strong>Colors:</strong> <span id="colors"></span>
-        </div>
-        <div class="order-info">
-            <strong>Total Cost:</strong> <span id="totalCost"></span>
-        </div>
-        <div class="order-info">
-            <strong>Flower Ordered:</strong> <span id="flowerName"></span>
+        <div class="right">
+            <div class="description">Beautiful and fresh roses to brighten your day.</div>
+            <div class="description">Elegant roses perfect for any occasion.</div>
+            <div class="description">Vibrant roses that make a statement.</div>
+            <label for="roseQuantity">How Many Roses You Want</label>
+            <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
+            <div class="slider-value" id="sliderValue">0</div>
+            <div class="checkboxes">
+                <label><input type="checkbox" name="color" value="Red" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
+                <label><input type="checkbox" name="color" value="Orange" onclick="changeRoseColor(this)"> Orange</label>
+                <label><input type="checkbox" name="color" value="Yellow" onclick="changeRoseColor(this)"> Yellow</label>
+                <label><input type="checkbox" name="color" value="Blue" onclick="changeRoseColor(this)"> Blue</label>
+                <label><input type="checkbox" name="color" value="Green" onclick="changeRoseColor(this)"> Green</label>
+                <label><input type="checkbox" name="color" value="Indigo" onclick="changeRoseColor(this)"> Indigo</label>
+                <label><input type="checkbox" name="color" value="Violet" onclick="changeRoseColor(this)"> Violet</label>
+                <label><input type="checkbox" name="color" value="Pink" onclick="changeRoseColor(this)"> Pink</label>
+                <label><input type="checkbox" name="color" value="Black" onclick="changeRoseColor(this)"> Black</label>
+                <label><input type="checkbox" name="color" value="White" onclick="changeRoseColor(this)"> White</label>
+            </div>
+            <div class="error" id="error">No More Than One Color</div>
+            <div id="totalCost">Total Cost: $0</div>
+            <div id="orderSummary">What You Ordered: </div>
+            <form id="orderForm">
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="address" id="address" placeholder="Address" required>
+                <textarea name="specialInstructions" id="specialInstructions" class="special-instructions" placeholder="Special Instructions"></textarea> <!-- Special instructions box -->
+                <input type="hidden" name="quantity" id="hiddenQuantity">
+                <input type="hidden" name="colors" id="hiddenColors">
+                <input type="hidden" name="totalCost" id="hiddenTotalCost">
+                <input type="hidden" name="flowerName" id="hiddenFlowerName">
+                <input type="hidden" name="orderDate" id="hiddenOrderDate">
+                <button class="button" type="submit">Send Order</button>
+            </form>
         </div>
     </div>
 
     <script>
-        window.onload = function() {
-            // Parse the order data from localStorage
-            const orderData = JSON.parse(localStorage.getItem('orderData'));
+        let currentImage = 0;
+        const images = {
+            "Red": "RoseRed.png",
+            "Orange": "RoseOrange.png",
+            "Yellow": "RoseYellow.png",
+            "Blue": "RoseBlue.png",
+            "Green": "RoseGreen.png",
+            "Indigo": "RoseIndigo.png",
+            "Violet": "RoseViolet.png",
+            "Pink": "RosePink.png",
+            "Black": "RoseBlack.png",
+            "White": "RoseWhite.png"
+        };
+        const roseImage = document.getElementById('roseImage');
+        const checkboxes = document.querySelectorAll('input[name="color"]');
+        const error = document.getElementById('error');
+        const slider = document.getElementById('roseQuantity');
+        const sliderValue = document.getElementById('sliderValue');
 
-            // Set the order details in the HTML
-            document.getElementById('firstName').innerText = orderData.firstName;
-            document.getElementById('lastName').innerText = orderData.lastName;
-            document.getElementById('email').innerText = orderData.email;
-            document.getElementById('address').innerText = orderData.address;
-            document.getElementById('quantity').innerText = orderData.quantity;
-            document.getElementById('colors').innerText = orderData.colors;
-            document.getElementById('totalCost').innerText = orderData.totalCost;
-
-            // Set the flower name
-            document.getElementById('flowerName').innerText = orderData.flowerName;
+        function changeImage() {
+            currentImage = (currentImage + 1) % Object.values(images).length;
+            roseImage.src = Object.values(images)[currentImage];
+            roseImage.style.opacity = 0;
+            setTimeout(() => {
+                roseImage.src = Object.values(images)[currentImage];
+                roseImage.style.opacity = 1;
+            }, 500);
         }
-    </script>
-</body>
-</html>
+
+        function changeRoseColor(clickedCheckbox) {
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== clickedCheckbox) checkbox.checked = false;
+            });
+            const selectedColor = Array.from(checkboxes).find(checkbox => checkbox.checked)?.value || 'Red';
+            roseImage.src = images[selectedColor];
+            updateOrder();
+        }
+
+        function updateOrder() {
+            const quantity = slider.value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            let totalCost = quantity * 3;
+
+            if (colors.length > 0 && colors[0] !== 'Red') {
+                totalCost += colors.length * 3;
+            }
+
+            sliderValue.innerText = quantity;
+            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
+            document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
+        }
+
+        function prepareOrder() {
+            const quantity = slider.value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = document.getElementById('totalCost').innerText;
+            const specialInstructions = document.getElementById('specialInstructions').value;
+            const orderDate = new Date().toLocaleString();
+
+            document.getElementById('hiddenQuantity').value = quantity;
+            document.getElementById('hiddenColors').value = colors.join(', ');
+            document.getElementById('hiddenTotalCost').value = totalCost;
+            document.getElementById('hiddenFlowerName').value = "Rose";
+            document.getElementById('hiddenSpecialInstructions').value = specialInstructions;
+            document.getElementById('hidden[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
