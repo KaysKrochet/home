@@ -191,14 +191,10 @@
         function updateOrder() {
             const quantity = parseInt(slider.value, 10);
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            let totalCost = 0;
-
-            if (quantity > 0) {
-                totalCost = 3 + (quantity - 1) * 3; // $3 for first rose, $3 each for additional roses
-            }
+            let totalCost = quantity * 3; // Each rose costs $3
 
             if (colors.length > 0 && colors[0] !== 'Red') {
-                totalCost += colors.length * 3;
+                totalCost += 3; // Add $3 for non-red color
             }
 
             sliderValue.innerText = quantity;
@@ -215,4 +211,6 @@
 
             document.getElementById('hiddenQuantity').value = quantity;
             document.getElementById('hiddenColors').value = colors.join(', ');
-            document.getElementById('hiddenTotalCost').[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
+            document.getElementById('hiddenTotalCost').value = totalCost;
+            document.getElementById('hiddenFlowerName').value = "Rose"; // Set the flower name
+            document.getElementById('hiddenOrder[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
