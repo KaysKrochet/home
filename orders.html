@@ -1,24 +1,77 @@
-<script>
-    window.onload = function() {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const container = document.querySelector('.container');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-info {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <div class="order-info">
+            <strong>First Name:</strong> <span id="firstName"></span>
+        </div>
+        <div class="order-info">
+            <strong>Last Name:</strong> <span id="lastName"></span>
+        </div>
+        <div class="order-info">
+            <strong>Email:</strong> <span id="email"></span>
+        </div>
+        <div class="order-info">
+            <strong>Address:</strong> <span id="address"></span>
+        </div>
+        <div class="order-info">
+            <strong>Quantity:</strong> <span id="quantity"></span>
+        </div>
+        <div class="order-info">
+            <strong>Colors:</strong> <span id="colors"></span>
+        </div>
+        <div class="order-info">
+            <strong>Total Cost:</strong> <span id="totalCost"></span>
+        </div>
+        <div class="order-info">
+            <strong>Flower Ordered:</strong> <span id="flowerName"></span>
+        </div>
+    </div>
 
-        orders.forEach(order => {
-            const orderCard = document.createElement('div');
-            orderCard.className = 'order-info';
+    <script>
+        window.onload = function() {
+            // Parse the order data from localStorage
+            const orderData = JSON.parse(localStorage.getItem('orderData'));
 
-            orderCard.innerHTML = `
-                <div><strong>First Name:</strong> ${order.firstName}</div>
-                <div><strong>Last Name:</strong> ${order.lastName}</div>
-                <div><strong>Email:</strong> ${order.email}</div>
-                <div><strong>Address:</strong> ${order.address}</div>
-                <div><strong>Quantity:</strong> ${order.quantity}</div>
-                <div><strong>Colors:</strong> ${order.colors}</div>
-                <div><strong>Total Cost:</strong> ${order.totalCost}</div>
-                <div><strong>Date:</strong> ${order.orderDate}</div>
-            `;
+            // Set the order details in the HTML
+            document.getElementById('firstName').innerText = orderData.firstName;
+            document.getElementById('lastName').innerText = orderData.lastName;
+            document.getElementById('email').innerText = orderData.email;
+            document.getElementById('address').innerText = orderData.address;
+            document.getElementById('quantity').innerText = orderData.quantity;
+            document.getElementById('colors').innerText = orderData.colors;
+            document.getElementById('totalCost').innerText = orderData.totalCost;
 
-            container.appendChild(orderCard);
-        });
-    }
-</script>
+            // Set the flower name
+            document.getElementById('flowerName').innerText = orderData.flowerName;
+        }
+    </script>
+</body>
+</html>
