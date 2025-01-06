@@ -50,6 +50,9 @@
         <div class="order-info">
             <strong>Total Cost:</strong> <span id="totalCost"></span>
         </div>
+        <div class="order-info">
+            <strong>Flower Ordered:</strong> <span id="flowerName"></span>
+        </div>
     </div>
 
     <script>
@@ -65,6 +68,9 @@
             document.getElementById('quantity').innerText = orderData.quantity;
             document.getElementById('colors').innerText = orderData.colors;
             document.getElementById('totalCost').innerText = orderData.totalCost;
+
+            // Set the flower name
+            document.getElementById('flowerName').innerText = orderData.flowerName;
         }
     </script>
 </body>
