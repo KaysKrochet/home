@@ -98,7 +98,7 @@
 <body>
     <div class="container">
         <div class="left">
-            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
+            <img id="roseImage" src="RoseRed.png" alt="Rose" width="100%"> <!-- Set initial image to red rose -->
             <div class="arrow" onclick="changeImage()">Arrow to change photos</div>
         </div>
         <div class="right">
@@ -109,7 +109,7 @@
             <input type="range" id="roseQuantity" class="slider" min="0" max="12" value="0" oninput="updateOrder()">
             <div class="slider-value" id="sliderValue">0</div>
             <div class="checkboxes">
-                <label><input type="checkbox" name="color" value="Red" onclick="changeRoseColor(this)"> Red</label>
+                <label><input type="checkbox" name="color" value=" Default (Red)" onclick="changeRoseColor(this)" checked> Red</label> <!-- Set red as default -->
                 <label><input type="checkbox" name="color" value="Orange" onclick="changeRoseColor(this)"> Orange</label>
                 <label><input type="checkbox" name="color" value="Yellow" onclick="changeRoseColor(this)"> Yellow</label>
                 <label><input type="checkbox" name="color" value="Blue" onclick="changeRoseColor(this)"> Blue</label>
@@ -131,7 +131,7 @@
                 <input type="hidden" name="quantity" id="hiddenQuantity">
                 <input type="hidden" name="colors" id="hiddenColors">
                 <input type="hidden" name="totalCost" id="hiddenTotalCost">
-                <input type="hidden" name="flowerName" id="hiddenFlowerName"> <!-- New hidden field for flower name -->
+                <input type="hidden" name="flowerName" id="hiddenFlowerName">
                 <button class="button" type="submit">Send Order</button>
             </form>
         </div>
@@ -184,7 +184,13 @@
         function updateOrder() {
             const quantity = slider.value;
             const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-            const totalCost = quantity * 3 + colors.length * 3;
+            let totalCost = quantity * 3;
+
+            // If the color is not red, add extra cost
+            if (colors.length > 0 && colors[0] !== 'Red') {
+                totalCost += colors.length * 3;
+            }
+
             sliderValue.innerText = quantity;
             document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
             document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
@@ -218,6 +224,5 @@
 
             window.location.href = 'thanks.html';
         });
-    </script>
-</body>
-</html>
+
+        // Set initial[_{{{CITATION{{{_1{](https://github.com/henriquegmendes/url-shortener-alfred/tree/bb8fda4cedbf8bee33efa5830fece6ad80841440/documentation%2Fredirect-to-url.md)[_{{{CITATION{{{_2{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
