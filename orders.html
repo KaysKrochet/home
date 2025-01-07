@@ -29,15 +29,32 @@
             margin-bottom: 10px;
             border-radius: 5px;
             background-color: #fafafa;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
         }
         .order-info {
             margin-bottom: 5px;
+        }
+        .clear-button {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #ff0055;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .clear-button:hover {
+            background-color: #ff3377;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Order Confirmation</h2>
+        <div class="clear-button" onclick="clearOrders()">🔄 Clear Orders</div>
         <div id="ordersContainer"></div>
     </div>
 
@@ -68,6 +85,22 @@
 
                 ordersContainer.appendChild(orderDiv);
             });
+        }
+
+        function clearOrders() {
+            const ordersContainer = document.getElementById('ordersContainer');
+            const orders = ordersContainer.children;
+            Array.from(orders).forEach(order => {
+                order.style.opacity = 0;
+            });
+
+            // Wait for the transition to complete before clearing orders
+            setTimeout(() => {
+                localStorage.removeItem('orders');
+                while (ordersContainer.firstChild) {
+                    ordersContainer.removeChild(ordersContainer.firstChild);
+                }
+            }, 500);
         }
     </script>
 </body>
