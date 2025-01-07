@@ -214,7 +214,9 @@
     // Retrieve existing orders from localStorage or initialize an empty array
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
-    // Add the new order to the array
+    // Add the new order to the array with the order date
+    orderData.orderDate = new Date().toLocaleString();
+    orderData.flowerName = "Rose"; // Set flower type here
     orders.push(orderData);
 
     // Save the updated orders array to localStorage
