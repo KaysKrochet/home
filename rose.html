@@ -200,22 +200,32 @@
         }
 
         document.getElementById('orderForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            prepareOrder();
+    event.preventDefault();
+    prepareOrder();
 
-            const formData = new FormData(this);
+    const formData = new FormData(this);
 
-            const orderData = {};
-            formData.forEach((value, key) => {
-                orderData[key] = value;
-            });
+    // Convert form data to a JSON object
+    const orderData = {};
+    formData.forEach((value, key) => {
+        orderData[key] = value;
+    });
 
-            localStorage.setItem('orderData', JSON.stringify(orderData));
+    // Retrieve existing orders from localStorage or initialize an empty array
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
-            alert('Order successfully sent!');
+    // Add the new order to the array
+    orders.push(orderData);
 
-            window.location.href = 'thanks.html';
-        });
+    // Save the updated orders array to localStorage
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Simulate successful order submission
+    alert('Order successfully sent!');
+
+    // Redirect to orders.html
+    window.location.href = 'thanks.html';
+});
 
     </script>
 </body>
