@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="https://images.emojiterra.com/google/android-11/1024px/1f339.png">
+    <title>Rose Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(270deg, red, pink);
+            background-size: 400% 400%;
+            animation: gradientFlow 10s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row; 
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-container {
+            width: 50%;
+            margin-right: 20px;
+            text-align: left;
+            position: relative;
+        }
+
+        .payment-container {
+            width: 50%;
+            text-align: right;
+            position: relative;
+        }
+
+        .arrow {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .description {
+            margin-bottom: 10px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .checkboxes {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .order-details {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0055;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #ff3377;
+        }
+
+        .special-instructions {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: grey;
+        }
+
+        .order-title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .payment-title {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .payment-options {
+            margin-top: 20px;
+        }
+
+        .payment-option-list {
+            display: none;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .payment-option-list li {
+            padding: 5px 0;
+        }
+
+        .payment-checkbox {
+            display: block;
+            margin-top: 20px;
+        }
+
+        .extra-cost {
+            font-size: 12px;
+            color: grey;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="order-container">
+            <div class="order-title">Order Details</div>
+            <img id="roseImage" src="Rose.png" alt="Rose" width="100%">
+            <div class="arrow" onclick="changeImage()">➜</div>
+            <div id="orderSummary" class="order-details">What You Ordered: </div>
+            <div id="totalCost">Total Cost: $0</div>
+            <div class="extra-cost">*An extra $3 is added for shipping cost</div>
+            <form id="orderForm">
+                <input type="text" name="firstName" id="firstName" placeholder="First Name" required>
+                <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="text" name="address" id="address" placeholder="Address" required>
+                <textarea name="specialInstructions" id="specialInstructions" class="special-instructions" placeholder="Special Instructions"></textarea>
+                <input type="hidden" name="quantity" id="hiddenQuantity">
+                <input type="hidden" name="colors" id="hiddenColors">
+                <input type="hidden" name="totalCost" id="hiddenTotalCost">
+            </form>
+        </div>
+        <div class="payment-container">
+            <div class="payment-title">Payment Options</div>
+            <label class="payment-checkbox">
+                <input type="checkbox" id="payInPerson" onclick="togglePaymentOptions()"> Pay In Person
+            </label>
+            <div class="payment-options">
+                <button class="button" onclick="togglePaymentOptions()">Choose Payment Option</button>
+                <ul class="payment-option-list" id="paymentOptions">
+                    <li>Venmo</li>
+                    <li>CashApp</li>
+                    <li>Chime</li>
+                </ul>
+            </div>
+            <button class="button" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <script>
+        let currentImage = 0;
+        const images = ["Rose.png", "Rose2.png", "Rose3.png"];
+        const roseImage = document.getElementById('roseImage');
+        const checkboxes = document.querySelectorAll('input[name="color"]');
+        const error = document.getElementById('error');
+        const slider = document.getElementById('roseQuantity');
+        const sliderValue = document.getElementById('sliderValue');
+
+        function changeImage() {
+            currentImage = (currentImage + 1) % images.length;
+            roseImage.src = images[currentImage];
+            roseImage.style.opacity = 0;
+            setTimeout(() => {
+                roseImage.src = images[currentImage];
+                roseImage.style.opacity = 1;
+            }, 500);
+        }
+
+        function changeRoseColor(clickedCheckbox) {
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== clickedCheckbox) checkbox.checked = false;
+            });
+            const selectedColor = Array.from(checkboxes).find(checkbox => checkbox.checked)?.value || 'Red';
+            roseImage.src = images[selectedColor];
+            updateOrder();
+        }
+
+        function updateOrder() {
+            const quantity = parseInt(slider.value, 10);
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            let totalCost = quantity * 3 + 3; // Each rose costs $3 + $3 for shipping
+
+            if (colors.length > 0 && colors[0] !== 'Red') {
+                totalCost += 3; // Add $3 for non-red color
+            }
+
+            sliderValue.innerText = quantity;
+            document.getElementById('totalCost').innerText = `Total Cost: $${totalCost}`;
+            document.getElementById('orderSummary').innerText = `What You Ordered: ${quantity} Rose(s), Color: ${colors.join(', ')}`;
+        }
+
+        function togglePaymentOptions() {
+            const paymentOptions = document.getElementById('paymentOptions');
+            paymentOptions.style.display = paymentOptions.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function placeOrder() {
+            prepareOrder();
+            document.getElementById('orderForm').submit();
+        }
+
+        function prepareOrder() {
+            const quantity = slider.value;
+            const colors = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            const totalCost = document.getElementById('totalCost').innerText;
+
+            document.getElementById('hiddenQuantity').value = quantity;
+            document.getElementById('hiddenColors').value = colors.join(', ');
+            document.getElementById('hiddenTotalCost').value = totalCost;
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            prepareOrder();
+
+            const formData = new FormData(this);
+
+            // Convert form data to a JSON object
+            const orderData = {};
+            formData.forEach((value, key) => {
+                orderData[key] = value;
+            });
+
+            // Retrieve existing orders from localStorage or initialize an empty array
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            // Add the new order to the array with the order date
+            orderData.orderDate = new Date().toLocaleString();
+            orderData.flowerName = "Rose"; // Set flower type here
+            orders.push(orderData);
+
+            // Save the updated orders array to localStorage
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+           [_{{{CITATION{{{_1{](https://github.com/AnnieGlade4327/Team-Profile-Generator/tree/de9031cbd2c32f9d6f610c40af1bb0d04b57510d/src%2Ftemplate.js)[_{{{CITATION{{{_2{](https://github.com/pgmgent-thibdema/Corona_referral_platform/tree/383d0c98d4cea4ad5c3d0dc49618569f30821a45/views%2Flayout%2Fstarter.php)[_{{{CITATION{{{_3{](https://github.com/mjengman/apartment-search/tree/0f0b62023b631a25c87137c52a16ecbb3ecf7985/orientation%2Fsignin.php)
